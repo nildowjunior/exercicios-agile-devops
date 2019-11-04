@@ -18,20 +18,20 @@ ip netns add yellow
 brctl addbr v-net-0 **
 
 #Cria os cabos
-ip link add veth-green type veth peer name veth-green-bridge
-ip link add veth-yellow type veth peer name veth-yellow-bridge
+ip link add veth-green type veth peer name veth-green-br
+ip link add veth-yellow type veth peer name veth-yellow-br
 
 #ligando os cabos nas namespaces
 ip link set veth-green netns green
 ip link set veth-yellow netns yellow
 
 #ligando os cabos na bridge
-ip link set veth-green-bridge master v-net-0
-ip link set veth-yellow-bridge master v-net-0
+ip link set veth-green-br master v-net-0
+ip link set veth-yellow-br master v-net-0
 
 #subindo as interfaces
-ip link set veth-green-bridge up
-ip link set veth-yellow-bridge up
+ip link set veth-green-br up
+ip link set veth-yellow-br up
 
 # atribuindo ips e levantando as interfaces
 ip -n green addr add 192.168.15.10/24 dev veth-green
